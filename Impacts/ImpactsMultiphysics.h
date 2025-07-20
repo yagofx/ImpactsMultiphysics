@@ -15,11 +15,13 @@
 #include <iostream>
 #include <string>
 
+using namespace std;
+
 class ImpactsMultiphysics {
 public:
     ImpactsMultiphysics();
     void SendMessage() const;
 
 private:
-    std::string msg;
+    string msg;
 };
