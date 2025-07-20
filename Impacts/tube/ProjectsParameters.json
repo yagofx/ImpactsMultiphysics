@@ -1,0 +1,77 @@
+{
+    "problem data"  :   {
+        "problem_name" : "tube",
+        "parallel_type" : "OpenMP",
+        "start_time" : 0.0,
+        "end_time" : 1.0
+    },
+    "solver_settings"   :   {
+        "model_part_name"              : "FluidModelPart",
+        "domain_size"                  : 3,
+        "solver_type": "Monolithic",
+        "model_import_settings" :   {
+            "input_type" : "mdpa",
+            "input_name" : "tube"
+        },
+        "material_import"             : "FluidMaterials.json",
+        "maximum_iterations"          : 10,
+        "relative_velocity_tolerance" : 0.001,
+        "absolute_velocity_tolerance" : 1e-5,
+        "relative_pressure_tolerance" : 0.001,
+        "absolute_pressure_tolerance" : 1e-5,
+        "volume_model_part_name"      : "Parts_Fluid",
+        "skin_parts"                  : ["AutomaticInlet3D_Inlet","Outlet3D_Outlet","NoSlip3D_Walls"],
+        "time_stepping" :   {
+            "automatic_time_step" : "false",
+            "time_step" : 0.1
+        },
+        "formulation"                  : {
+            "element_type" : "vms"
+        }
+    },
+    "processes"     :   {
+        "boundary_conditions_process_list"  :   [{
+            "module"        : "apply_inlet_process",
+            "application"   : "ImpactsMultiphysics.FluidDynamicsApplication",
+            "Parameters"    :   {
+                "model_part_name"   : "FluidModelPart.AutomaticInlet3D_Inlet",
+                "variable"          : "VELOCITY",
+                "modulus"           : 1.0,
+                "direction"         : "inwards_normal",
+                "interval"          : [0,1]
+            } 
+        },{
+            "module"        : "apply_outlet_process",
+            "application"   : "ImpactsMultiphysics.FluidDynamicsApplication",
+            "Parameters"    :   {
+                "model_part_name"   : "FluidModelPart.Outlet3D_Outlet",
+                "variable"          : "PRESSURE",
+                "value"              : 0.0
+            } 
+        },{
+            "module"        : "apply_noslip_process",
+            "application"   : "ImpactsMultiphysics.FluidDynamicsApplication",
+            "Parameters"    :   {
+                "model_part_name"   : "FluidModelPart.NoSlip3D_Walls"
+            }
+
+        }]
+    },
+    "vtk_output" :  [{
+       "module"         : "vtk_output_process",
+       "application"    : "ImpactsMultiphysics",
+       "Parameters"     :   {
+            "model_part_name"       :   "FluidModelPart",
+            "output_control_type"   :   "step",
+            "output_interval"       :   1,
+            "file_format"           :   "ascii",
+            "output_precision"      :   7,
+            "output_path"           :   true,
+            "nodal_solution"        :   ["VELOCITY, PRESSURE"],
+            "nodal_data"            :   [],
+            "element_solution"      :   [],
+            "element_data"          :   [],
+            "condition_data"        :   []
+       }
+    }]
+}

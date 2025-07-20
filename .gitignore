@@ -1,0 +1,38 @@
+# Build directories
+/build/
+/CMakeFiles/
+/cmake-build-*/
+
+# Compiled object files
+*.o
+*.obj
+*.so
+*.dll
+*.dylib
+*.exe
+*.out
+
+# CMake generated files
+CMakeCache.txt
+CMakeLists.txt.user
+Makefile
+install_manifest.txt
+
+# IDE files
+*.user
+*.vcxproj*
+*.sln
+*.DS_Store
+*.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Backup files
+*~
+*.swp
+*.bak
+
+# Ignore JSON file if it's just for testing (optional)
+# ProjectParameters.json

@@ -10,3 +10,16 @@
 //
 //  Main authors:       Yago Trias
 //
+
+//Include
+#include <iostream>
+#include <string>
+
+class ImpactsMultiphysics {
+public:
+    ImpactsMultiphysics();
+    void SendMessage() const;
+
+private:
+    std::string msg;
+};

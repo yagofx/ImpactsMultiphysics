@@ -10,3 +10,18 @@
 //
 //  Main authors:       Yago Trias
 //
+
+//Include
+#include <iostream>
+
+#include "ImpactsMultiphysics.h"
+
+using namespace std;
+
+ImpactsMultiphysics::ImpactsMultiphysics()
+    : msg("Main class ImpactsMultiphysics") {}
+
+void ImpactsMultiphysics::SendMessage() const {
+    cout << msg << endl;
+
+}
